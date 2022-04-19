@@ -40,6 +40,7 @@ class OrderedList(List):
         padding_left: Decimal = Decimal(0),
         padding_right: Decimal = Decimal(0),
         padding_top: Decimal = Decimal(0),
+        start_index: int = 1,
         vertical_alignment: Alignment = Alignment.TOP,
     ):
         super(OrderedList, self).__init__(
@@ -64,13 +65,14 @@ class OrderedList(List):
             background_color=background_color,
             horizontal_alignment=horizontal_alignment,
             vertical_alignment=vertical_alignment,
+            start_index=start_index,
         )
 
     def _get_bullet_layout_element(
         self, item_index: int, item: LayoutElement
     ) -> LayoutElement:
         return ChunkOfText(
-            text=str(item_index + 1) + ".",
+            text=str(item_index) + ".",
             font_size=self.get_font_size(),
             font_color=X11Color("Black"),
         )

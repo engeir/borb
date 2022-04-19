@@ -41,6 +41,7 @@ class List(LayoutElement):
         padding_left: Decimal = Decimal(0),
         padding_right: Decimal = Decimal(0),
         padding_top: Decimal = Decimal(0),
+        start_index: int = 1,
         vertical_alignment: Alignment = Alignment.TOP,
     ):
         super(List, self).__init__(
@@ -68,6 +69,7 @@ class List(LayoutElement):
             vertical_alignment=vertical_alignment,
         )
         self._items: typing.List[LayoutElement] = []
+        self._start_index: int = start_index
 
     def add(self, element: LayoutElement) -> "List":
         """
@@ -130,7 +132,7 @@ class List(LayoutElement):
             # fmt: on
 
             # bullet character
-            self._get_bullet_layout_element(index, item).layout(
+            self._get_bullet_layout_element(index + self._start_index, item).layout(
                 page=page,
                 bounding_box=Rectangle(
                     bounding_box.x,
